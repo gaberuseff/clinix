@@ -1,5 +1,7 @@
-import {Barcode, Folder, Home, Settings, UsersRound} from "lucide-react";
-import {Link} from "react-router";
+import Logout from "@/features/auth/Logout";
+import {Barcode, Folder, Home, Settings} from "lucide-react";
+import {FaUserTie} from "react-icons/fa";
+import {Link, useLocation} from "react-router";
 import {
   Sidebar,
   SidebarContent,
@@ -11,32 +13,42 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "./ui/sidebar";
+import useUser from "@/features/auth/useUser";
 
 const navItems = [
   {title: "Dashboard", url: "/dashboard", icon: Home},
-  {title: "Customers", url: "/customers", icon: UsersRound},
+  {title: "Secretaries", url: "/secretaries", icon: FaUserTie},
   {title: "Projects", url: "/projects", icon: Folder},
   {title: "Discount Codes", url: "/discount-codes", icon: Barcode},
   {title: "Settings", url: "/settings", icon: Settings},
 ];
 
 export function AppSidebar() {
+  const {pathname} = useLocation();
+  const {userMetadata, isLoading, firstName} = useUser();
+
   return (
     <Sidebar>
       <SidebarHeader className="border-b">
-        <div className="px-2 py-1 text-sm font-semibold text-center">
-          Gaber Dashboard
+        <div className="p-2 text-sm font-semibold text-center">
+          Hi {isLoading ? "..." : firstName || userMetadata.email}
         </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="p-2 space-y-1">
               {navItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild size="md">
+                <SidebarMenuItem key={item.title} className="">
+                  <SidebarMenuButton
+                    asChild
+                    size="md"
+                    isActive={
+                      pathname === item.url ||
+                      pathname.startsWith(`${item.url}/`)
+                    }>
                     <Link to={item.url} className="flex items-center gap-2">
-                      <item.icon className="h-5 w-5" />
+                      <item.icon className="h-10 w-10" />
                       {item.title}
                     </Link>
                   </SidebarMenuButton>
@@ -47,8 +59,11 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <div className="px-2 py-1 text-xs text-muted-foreground">
-          Signed in as admin@example.com
+        <div className="border-t space-y-2 pt-4">
+          <Logout />
+          <div className="px-2 py-1 text-xs text-muted-foreground">
+            Signed in as {userMetadata.email}
+          </div>
         </div>
       </SidebarFooter>
     </Sidebar>
