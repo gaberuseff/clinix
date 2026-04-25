@@ -1,6 +1,7 @@
 import Logout from "@/features/auth/Logout";
-import {Barcode, Folder, Home, Settings} from "lucide-react";
-import {FaUserTie} from "react-icons/fa";
+import useUser from "@/features/auth/useUser";
+import {Barcode, Folder, Settings} from "lucide-react";
+import {FaThLarge, FaUserInjured, FaUserTie} from "react-icons/fa";
 import {Link, useLocation} from "react-router";
 import {
   Sidebar,
@@ -13,10 +14,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "./ui/sidebar";
-import useUser from "@/features/auth/useUser";
 
 const navItems = [
-  {title: "Dashboard", url: "/dashboard", icon: Home},
+  {title: "Dashboard", url: "/dashboard", icon: FaThLarge},
+  {title: "Patients", url: "/patients", icon: FaUserInjured},
   {title: "Secretaries", url: "/secretaries", icon: FaUserTie},
   {title: "Projects", url: "/projects", icon: Folder},
   {title: "Discount Codes", url: "/discount-codes", icon: Barcode},

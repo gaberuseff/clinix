@@ -10,6 +10,7 @@ import DiscountCodes from "./pages/DiscountCodes";
 import ForgotPassword from "./pages/ForgotPassword";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import Patients from "./pages/Patients";
 import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword";
 import Secretaries from "./pages/Secretaries";
@@ -32,6 +33,7 @@ function AppRoutes() {
             <Route element={<AppLayout />}>
               <Route index element={<Navigate replace to="/dashboard" />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/patients" element={<Patients />} />
               <Route path="/secretaries" element={<Secretaries />} />
               <Route path="/discount-codes" element={<DiscountCodes />} />
               <Route path="/settings" element={<Settings />} />

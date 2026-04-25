@@ -1,6 +1,7 @@
-import {Spinner} from "@/components/ui/spinner";
-import {FaEllipsisH, FaUserTie} from "react-icons/fa";
-import {Button} from "../../components/ui/button";
+import Error from "@/components/Error";
+import { Spinner } from "@/components/ui/spinner";
+import { FaEllipsisH, FaUserTie } from "react-icons/fa";
+import { Button } from "../../components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,14 +18,13 @@ import {
   TableRow,
 } from "../../components/ui/table";
 import useUser from "../auth/useUser";
-import useGetSecretaries from "./useGetSecretaries";
-import Error from "@/components/Error";
+import useGetClinicSecretaries from "./useGetClinicSecretaries";
 
 function SecretariesTable() {
   const {clinicId} = useUser();
 
   const {secretaries, isSecretariesLoading, error} =
-    useGetSecretaries(clinicId);
+    useGetClinicSecretaries(clinicId);
 
   if (isSecretariesLoading) {
     return <Spinner className="mx-auto size-8" />;

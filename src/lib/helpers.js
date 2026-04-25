@@ -17,3 +17,12 @@ export function formatDateTime(value) {
 
     return new Date(value).toLocaleString();
 }
+
+export function calculateAge(birthYear) {
+    const parsed = Number(birthYear);
+    const currentYear = new Date().getFullYear();
+    if (!birthYear || isNaN(parsed) || parsed < 1900 || parsed > currentYear) {
+        return "—";
+    }
+    return currentYear - parsed;
+}
